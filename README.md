@@ -33,15 +33,22 @@ We plan to use React.js
 
 ## 6
 Our tables will be formatted as such:
-<!-- | Project Name  | Documents | Users |
-| ------------- | ------------- | ------------- |
-| English Presentation  | Presentation.ppt  | Joe, Cindy | -->
-
 | Project Name        | Documents           | Users  |
 | ------------- |:-------------:| -----:|
 | English Presentation      | Presentation.ppt | Joe, Cindy |
 
 
 ## 7 
+Forms will be utilized to submit documents and alter them as required.
+They will also be able to add or remove group members and make any necessary changes to the project to collaborate effectively.
 
 ## 8 
+We will utilize CSS to make our application look sleek and user friendly.
+
+# User updates
+Users will be able to update the DB through several options.
+1. Adding/Removing a project or document.
+2. Managing Group Members.
+3. Changing a document from private to public.
+4. Altering the documents themselves.
+5. etc.
