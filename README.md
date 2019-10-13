@@ -36,7 +36,7 @@ Our tables will be formatted as such:
 | Project Name        | Documents           | Users  |
 | ------------- |:-------------:| -----:|
 | English Presentation      | Presentation.ppt | Joe, Cindy |
-
+| ..      | Proposal.txt | Joe, Cindy, Matt |
 
 ## 7 
 Forms will be utilized to submit documents and alter them as required.
