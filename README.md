@@ -34,7 +34,7 @@ We plan to use React.js
 ## 6
 Our tables will be formatted as such:
 | Project Name  | Documents | Users |
-| ------------- | ------------- | ---------- |
+| ------------- | ------------- | ------------- |
 | English Presentation  | Presentation.ppt  | Joe, Cindy |
 
 ## 7 
