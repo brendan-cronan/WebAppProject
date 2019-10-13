@@ -33,15 +33,14 @@ We plan to use React.js
 
 ## 6
 Our tables will be formatted as such:
-| Project Name  | Documents | Users |
+<!-- | Project Name  | Documents | Users |
 | ------------- | ------------- | ------------- |
-| English Presentation  | Presentation.ppt  | Joe, Cindy |
+| English Presentation  | Presentation.ppt  | Joe, Cindy | -->
 
-| Tables        | Are           | Cool  |
+| Project Name        | Documents           | Users  |
 | ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+| English Presentation      | Presentation.ppt | Joe, Cindy |
+
 
 ## 7 
 
