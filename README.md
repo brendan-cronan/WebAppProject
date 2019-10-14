@@ -33,11 +33,11 @@ We plan to use React.js
 
 ## 6
 Our tables will be formatted as such:
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+
+| Project Name        | Documents           | Users  
+| ------------- |:-------------:| -----:
+| English Presentation      | Presentation.ppt | Joe, Cindy 
+| ..      | Proposal.txt | Joe, Cindy, Matt 
 
 ## 7 
 Forms will be utilized to submit documents and alter them as required.
