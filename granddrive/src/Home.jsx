@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import './Home.css'
 import { AppDB } from "./db-init";
 
 class Home extends Component {
@@ -16,12 +17,27 @@ class Home extends Component {
     }
 
     render() {
-        return (<div>
-            <h2>Documents</h2>
-            <ul>
-                {this.state.docs.map(x =>
-                    <li>{x.name} {x.ownerId}</li>)}
-            </ul>
+        return (<div id="container">
+
+            <section id="toolbar">
+                <button className="menuitem" onClick={this.newButtonHandler.bind(this)}>New</button>
+                <span className="filler"></span>
+                <button className="menuitem" onClick={this.optionsButtonHandler.bind(this)}>Options</button>
+                <button className="menuitem" onClick={this.signoutButtonHandler.bind(this)}>Sign Out</button>
+            </section>
+            <section id="navpanel">
+                <span className="navitem">My Documents</span>
+                <span className="navitem">Shared with Me</span>
+                <span className="navitem">Recent</span>
+
+            </section>
+            <section id="main">
+                <h2>Documents</h2>
+                <ul>
+                    {this.state.docs.map((x, i) =>
+                        <li key={i}>{x.name} {x.ownerId}</li>)}
+                </ul>
+            </section>
         </div>);
     }
 
@@ -46,6 +62,22 @@ class Home extends Component {
         } else {
             this.setState({ [ev.target.name]: ev.target.value });
         }
+    }
+
+    buttonHandler(ev) {
+        console.log(ev.target + ' pressed')
+    }
+
+    newButtonHandler(ev) {
+        console.log('new button pressed');
+    }
+
+    optionsButtonHandler(ev) {
+        console.log('options button pressed')
+    }
+
+    signoutButtonHandler(ev) {
+        console.log('signout button pressed')
     }
 }
 
