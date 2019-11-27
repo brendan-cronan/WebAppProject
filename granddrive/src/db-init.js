@@ -1,5 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/database";
+import "firebase/auth";
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
@@ -16,4 +17,5 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const AppDB = firebase.database();
-export { AppDB }; // Make this name available to other modules
+const AppAUTH = firebase.auth();
+export { AppDB, AppAUTH }; // Make this name available to other modules
