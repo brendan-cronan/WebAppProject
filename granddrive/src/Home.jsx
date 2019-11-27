@@ -26,9 +26,9 @@ class Home extends Component {
                 <button className="menuitem" onClick={this.signoutButtonHandler.bind(this)}>Sign Out</button>
             </section>
             <section id="navpanel">
-                <span className="navitem">My Documents</span>
-                <span className="navitem">Shared with Me</span>
-                <span className="navitem">Recent</span>
+                <span id="myDocs" className="navitem" onClick={this.menuItemHandler.bind(this)}>My Documents</span>
+                <span id="shared" className="navitem" onClick={this.menuItemHandler.bind(this)}>Shared with Me</span>
+                <span id="recent" className="navitem" onClick={this.menuItemHandler.bind(this)}>Recent</span>
 
             </section>
             <section id="main">
@@ -78,6 +78,10 @@ class Home extends Component {
 
     signoutButtonHandler(ev) {
         console.log('signout button pressed')
+    }
+
+    menuItemHandler(ev) {
+        console.log(ev.currentTarget.id + ' pressed')
     }
 }
 
