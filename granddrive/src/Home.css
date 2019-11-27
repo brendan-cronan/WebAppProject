@@ -64,3 +64,7 @@ body {
   background-color: rgb(255, 255, 255);
   color: rgb(32, 32, 32);
 }
+
+.inactive {
+  display: none;
+}

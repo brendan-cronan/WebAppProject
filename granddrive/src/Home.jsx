@@ -34,6 +34,16 @@ class Home extends Component {
             </section>
             <section id="main">
                 <h2>Documents</h2>
+                <ul>
+                    <li className={this.state.activeTab === "myDocs" ? "" : "inactive"}>
+                        My documents go here</li>
+                    <li className={this.state.activeTab === "shared" ? "" : "inactive"}>
+                        Shared documents go here
+                    </li >
+                    <li className={this.state.activeTab === "recent" ? "" : "inactive"}>
+                        Recent documents go here
+                    </li>
+                </ul>
 
                 <ul>
                     {this.state.docs.map((x, i) =>
