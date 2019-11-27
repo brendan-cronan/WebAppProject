@@ -7,7 +7,8 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            docs: []
+            docs: [],
+            activeTab: "myDocs"
         }
     }
 
@@ -33,6 +34,7 @@ class Home extends Component {
             </section>
             <section id="main">
                 <h2>Documents</h2>
+
                 <ul>
                     {this.state.docs.map((x, i) =>
                         <li key={i}>{x.name} {x.ownerId}</li>)}
@@ -81,7 +83,9 @@ class Home extends Component {
     }
 
     menuItemHandler(ev) {
-        console.log(ev.currentTarget.id + ' pressed')
+        let tab = ev.currentTarget.id;
+        console.log(`switching active tab to ${tab}`)
+        this.setState({ activeTab: tab });
     }
 }
 
