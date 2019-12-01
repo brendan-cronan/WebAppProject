@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import './Home.css'
 import { AppDB } from "./db-init";
 
+
 class Home extends Component {
 
     constructor(props) {
@@ -10,6 +11,8 @@ class Home extends Component {
             docs: [],
             activeTab: "myDocs"
         }
+
+
     }
 
     componentDidMount() {
@@ -18,39 +21,46 @@ class Home extends Component {
     }
 
     render() {
-        return (<div id="container">
+        return (
 
-            <section id="toolbar">
-                <button className="menuitem" onClick={this.newButtonHandler.bind(this)}>New</button>
-                <span className="filler"></span>
-                <button className="menuitem" onClick={this.optionsButtonHandler.bind(this)}>Options</button>
-                <button className="menuitem" onClick={this.signoutButtonHandler.bind(this)}>Sign Out</button>
-            </section>
-            <section id="navpanel">
-                <span id="myDocs" className="navitem" onClick={this.menuItemHandler.bind(this)}>My Documents</span>
-                <span id="shared" className="navitem" onClick={this.menuItemHandler.bind(this)}>Shared with Me</span>
-                <span id="recent" className="navitem" onClick={this.menuItemHandler.bind(this)}>Recent</span>
+            <div id="container">
 
-            </section>
-            <section id="main">
-                <h2>Documents</h2>
-                <ul>
-                    <li className={this.state.activeTab === "myDocs" ? "" : "inactive"}>
-                        My documents go here</li>
-                    <li className={this.state.activeTab === "shared" ? "" : "inactive"}>
+                <section id="toolbar">
+                    <button id="newDoc" className="menuitem" onClick={this.newButtonHandler.bind(this)}>New</button>
+                    <span className="filler"></span>
+                    <button className="menuitem" onClick={this.optionsButtonHandler.bind(this)}>Options</button>
+                    <button className="menuitem" onClick={this.signoutButtonHandler.bind(this)}>Sign Out</button>
+                </section>
+                <section id="navpanel">
+                    <span id="myDocs" className="navitem" onClick={this.menuItemHandler.bind(this)}>My Documents</span>
+                    <span id="shared" className="navitem" onClick={this.menuItemHandler.bind(this)}>Shared with Me</span>
+                    <span id="recent" className="navitem" onClick={this.menuItemHandler.bind(this)}>Recent</span>
+
+                </section>
+                <section id="main">
+                    <h2>Documents</h2>
+
+                    <div className={this.state.activeTab === "myDocs" ? "" : "inactive"}>
+                        My documents go here</div>
+                    <div className={this.state.activeTab === "shared" ? "" : "inactive"}>
                         Shared documents go here
-                    </li >
-                    <li className={this.state.activeTab === "recent" ? "" : "inactive"}>
+                    </div >
+                    <div className={this.state.activeTab === "recent" ? "" : "inactive"}>
                         Recent documents go here
-                    </li>
-                </ul>
+                    </div>
+                    <div className={this.state.activeTab === "newDoc" ? "" : "inactive"}>
+                        <div id="firepad-editor">
+                            Firepad editor goes here
+                            </div>
+                    </div>
 
-                <ul>
-                    {this.state.docs.map((x, i) =>
-                        <li key={i}>{x.name} {x.ownerId}</li>)}
-                </ul>
-            </section>
-        </div>);
+
+                    <ul>
+                        {this.state.docs.map((x, i) =>
+                            <li key={i}>{x.name} {x.ownerId}</li>)}
+                    </ul>
+                </section>
+            </div>);
     }
 
     fbAddHandler(snapshot) {
@@ -81,6 +91,7 @@ class Home extends Component {
     }
 
     newButtonHandler(ev) {
+        this.menuItemHandler(ev);
         console.log('new button pressed');
     }
 
