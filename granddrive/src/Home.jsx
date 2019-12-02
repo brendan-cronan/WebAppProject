@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import './Home.css'
 import { AppDB } from "./db-init";
+import CreateDoc from './CreateDoc';
 
 
 class Home extends Component {
@@ -8,6 +9,7 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            userEmail: this.props.location.state.userEmail,
             docs: [],
             activeTab: "myDocs"
         }
@@ -41,17 +43,15 @@ class Home extends Component {
                     <h2>Documents</h2>
 
                     <div className={this.state.activeTab === "myDocs" ? "" : "inactive"}>
-                        My documents go here</div>
+                        Documents owned by {this.state.userEmail} go here </div>
                     <div className={this.state.activeTab === "shared" ? "" : "inactive"}>
-                        Shared documents go here
+                        Documents shared with {this.state.userEmail} go here
                     </div >
                     <div className={this.state.activeTab === "recent" ? "" : "inactive"}>
                         Recent documents go here
                     </div>
                     <div className={this.state.activeTab === "newDoc" ? "" : "inactive"}>
-                        <div id="firepad-editor">
-                            Firepad editor goes here
-                            </div>
+                        <CreateDoc userEmail={this.state.userEmail} />
                     </div>
 
 
