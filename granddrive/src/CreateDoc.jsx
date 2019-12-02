@@ -6,9 +6,10 @@ class CreateDoc extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            docs: [],
-            activeTab: "myDocs",
-            owner: this.props.userEmail
+            owner: this.props.userEmail,
+            docName: "",
+            docDesc: "",
+            file: ""
         }
 
     }
@@ -17,11 +18,11 @@ class CreateDoc extends Component {
         return (<div>
             <div>
                 <label>Name:</label>
-                <input type="text" name="docName" />
+                <input type="text" name="docName" onChange={(e) => this.updateFormData(e)} />
             </div>
             <div>
                 <label>Description:</label>
-                <input type="text" name="docDesc" />
+                <input type="text" name="docDesc" onChange={(e) => this.updateFormData(e)} />
             </div>
 
             <div>
@@ -30,14 +31,34 @@ class CreateDoc extends Component {
             </div>
 
             <div>
-                <input type="file" ref="file" name="file"></input>
+                <input type="file" ref="file" name="file" onChange={(e) => this.updateFormData(e)}></input>
             </div>
 
             <div>
-                <button>Upload</button>
+                <button onClick={() => this.uploadFile()}>Upload</button>
             </div>
 
         </div>);
+    }
+
+    uploadFile() {
+        AppDB.ref("Documents")
+            .push()
+            .set({
+                docName: this.state.docName,
+                docDesc: this.state.docDesc,
+                ownerEmail: this.state.owner
+
+            });
+
+    }
+
+    updateFormData(ev) {
+        if (ev.target.type === "number") {
+            this.setState({ [ev.target.name]: Number(ev.target.value) });
+        } else {
+            this.setState({ [ev.target.name]: ev.target.value });
+        }
     }
 
 }

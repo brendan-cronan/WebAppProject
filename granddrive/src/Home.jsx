@@ -57,7 +57,7 @@ class Home extends Component {
 
                     <ul>
                         {this.state.docs.map((x, i) =>
-                            <li key={i}>{x.name} {x.ownerId}</li>)}
+                            <li key={i}>{x.docName} {x.docDesc} {x.ownerEmail}</li>)}
                     </ul>
                 </section>
             </div>);
