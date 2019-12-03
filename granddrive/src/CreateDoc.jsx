@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { AppDB } from "./db-init";
+import { AppDB, AppStorage } from "./db-init";
 
 class CreateDoc extends Component {
 
@@ -9,7 +9,9 @@ class CreateDoc extends Component {
             owner: this.props.userEmail,
             docName: "",
             docDesc: "",
-            file: "",
+            userFile: null,
+            url: '',
+
             updateTab: this.props.updateTab
         }
 
@@ -19,20 +21,25 @@ class CreateDoc extends Component {
         return (<div>
             <div>
                 <label>Name:</label>
-                <input type="text" name="docName" onChange={(e) => this.updateFormData(e)} />
+                <input type="text" id="docName" name="docName" onChange={(e) => this.updateFormData(e)} />
             </div>
             <div>
                 <label>Description:</label>
-                <input type="text" name="docDesc" onChange={(e) => this.updateFormData(e)} />
+                <input type="text" id="docDesc" name="docDesc" onChange={(e) => this.updateFormData(e)} />
             </div>
 
             <div>
                 <label>Share With:</label>
-                <input type="text" name="shareWith" />
+                <input type="text" id="shareWith" name="shareWith" />
             </div>
 
             <div>
-                <input type="file" ref="file" name="file" onChange={(e) => this.updateFormData(e)}></input>
+                <input type="file"
+                    ref="file"
+                    name="file"
+                    id="file"
+                    onChange={(e) => this.updateFile(e)}
+                ></input>
             </div>
 
             <div>
@@ -43,15 +50,52 @@ class CreateDoc extends Component {
     }
 
     uploadFile() {
-        AppDB.ref("Documents")
-            .push()
-            .set({
-                docName: this.state.docName,
-                docDesc: this.state.docDesc,
-                ownerEmail: this.state.owner
+
+        const { userFile: userFile } = this.state;
+
+        let dest;
+
+        if (userFile.type.match(/^image\/.*$/)) {
+            dest = 'images';
+        } else {
+            dest = 'text'
+        }
+
+
+        const uploadTask = AppStorage.ref(`${dest}/${userFile.name}`).put(userFile);
+        uploadTask.on('state_changed', (snapshot) => {
+            //progress
+        }, (error) => {
+            console.log(error);
+        }, () => {
+            //complete    
+            AppStorage.ref(dest).child(userFile.name).getDownloadURL().then(url => {
+                console.log(url);
+
+                AppDB.ref("Documents")
+                    .push()
+                    .set({
+                        docName: this.state.docName,
+                        docDesc: this.state.docDesc,
+                        ownerEmail: this.state.owner,
+                        url: url
+
+                    });
+                this.state.updateTab('myDocs');
+                this.setState({ docName: '', docDesc: '', userFile: null, url: '' });
+                document.getElementById('docName').value = '';
+                document.getElementById('docDesc').value = '';
+                document.getElementById('file').value = null;
 
             });
-        this.state.updateTab('myDocs');
+        });
+    }
+
+    updateFile(e) {
+        if (e.target.files[0]) {
+            const userFile = e.target.files[0];
+            this.setState({ userFile: userFile });
+        }
     }
 
     updateFormData(ev) {
