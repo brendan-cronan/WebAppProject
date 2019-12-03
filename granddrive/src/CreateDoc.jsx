@@ -9,7 +9,8 @@ class CreateDoc extends Component {
             owner: this.props.userEmail,
             docName: "",
             docDesc: "",
-            file: ""
+            file: "",
+            updateTab: this.props.updateTab
         }
 
     }
@@ -50,7 +51,7 @@ class CreateDoc extends Component {
                 ownerEmail: this.state.owner
 
             });
-
+        this.state.updateTab('myDocs');
     }
 
     updateFormData(ev) {

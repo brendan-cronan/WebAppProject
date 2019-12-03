@@ -28,7 +28,7 @@ class Home extends Component {
             <div id="container">
 
                 <section id="toolbar">
-                    <button id="newDoc" className="menuitem" onClick={this.newButtonHandler.bind(this)}>New</button>
+                    <button id="uploadDoc" className="menuitem" onClick={this.newButtonHandler.bind(this)}>Upload</button>
                     <span className="filler"></span>
                     <button className="menuitem" onClick={this.optionsButtonHandler.bind(this)}>Options</button>
                     <button className="menuitem" onClick={this.signoutButtonHandler.bind(this)}>Sign Out</button>
@@ -50,8 +50,8 @@ class Home extends Component {
                     <div className={this.state.activeTab === "recent" ? "" : "inactive"}>
                         Recent documents go here
                     </div>
-                    <div className={this.state.activeTab === "newDoc" ? "" : "inactive"}>
-                        <CreateDoc userEmail={this.state.userEmail} />
+                    <div className={this.state.activeTab === "uploadDoc" ? "" : "inactive"}>
+                        <CreateDoc userEmail={this.state.userEmail} updateTab={this.updateTab.bind(this)} />
                     </div>
 
 
@@ -105,6 +105,10 @@ class Home extends Component {
 
     menuItemHandler(ev) {
         let tab = ev.currentTarget.id;
+        this.updateTab(tab);
+    }
+
+    updateTab(tab) {
         console.log(`switching active tab to ${tab}`)
         this.setState({ activeTab: tab });
     }
