@@ -24,6 +24,7 @@ class Home extends Component {
     }
 
     render() {
+
         return (
 
             <div id="container">
@@ -41,12 +42,24 @@ class Home extends Component {
 
                 </section>
                 <section id="main">
-                    <h2>Documents</h2>
 
                     <div className={this.state.activeTab === "myDocs" ? "" : "inactive"}>
-                        Documents owned by {this.state.userEmail} go here </div>
+                        <h2>My Documents</h2>
+                        {this.state.docs.filter(doc => {
+                            return doc.ownerEmail === this.state.userEmail;
+                        }).
+                            map((x, i) =>
+                                <File key={i} owner={x.ownerEmail} docName={x.docName} docDesc={x.docDesc} url={x.url} />)
+                        }
+                    </div>
                     <div className={this.state.activeTab === "shared" ? "" : "inactive"}>
-                        Documents shared with {this.state.userEmail} go here
+                        <h2>Shared with Me</h2>
+                        {this.state.docs.filter(doc => {
+                            return doc.ownerEmail !== this.state.userEmail;
+                        }).
+                            map((x, i) =>
+                                <File key={i} owner={x.ownerEmail} docName={x.docName} docDesc={x.docDesc} url={x.url} />)
+                        }
                     </div >
                     <div className={this.state.activeTab === "recent" ? "" : "inactive"}>
                         Recent documents go here
@@ -54,11 +67,6 @@ class Home extends Component {
                     <div className={this.state.activeTab === "uploadDoc" ? "" : "inactive"}>
                         <CreateDoc userEmail={this.state.userEmail} updateTab={this.updateTab.bind(this)} />
                     </div>
-
-
-                    {this.state.docs.map((x, i) =>
-                        <File owner={x.ownerEmail} docName={x.docName} docDesc={x.docDesc} url={x.url} />)
-                    }
                 </section>
                 <section id="most-recent">
 
