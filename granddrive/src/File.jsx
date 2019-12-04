@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { AppDB } from "./db-init";
 
 class File extends Component {
     constructor(props) {
@@ -15,9 +14,13 @@ class File extends Component {
     render() {
         return (
             <div>
-                Here {this.state.docName}
-            </div>
+                {this.state.docName} {this.state.docDesc} <button onClick={() => this.openFile()}>Open</button>
+            </div >
         );
+    }
+
+    openFile() {
+        window.open(this.state.url, "_blank");
     }
 }
 
