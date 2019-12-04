@@ -9,6 +9,7 @@ class CreateDoc extends Component {
             owner: this.props.userEmail,
             docName: "",
             docDesc: "",
+            sharedWith: [],
             userFile: null,
             url: '',
 
