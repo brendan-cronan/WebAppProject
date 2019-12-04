@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import './Home.css'
 import { AppDB } from "./db-init";
 import CreateDoc from './CreateDoc';
+import File from './File';
 
 
 class Home extends Component {
@@ -55,10 +56,12 @@ class Home extends Component {
                     </div>
 
 
-                    <ul>
-                        {this.state.docs.map((x, i) =>
-                            <li key={i}>{x.docName} {x.docDesc} {x.ownerEmail}</li>)}
-                    </ul>
+                    {this.state.docs.map((x, i) =>
+                        <File owner={x.ownerEmail} docName={x.docName} docDesc={x.docDesc} url={x.url} />)
+                    }
+                </section>
+                <section id="most-recent">
+
                 </section>
             </div>);
     }
