@@ -52,14 +52,16 @@ class CreateDoc extends Component {
 
     uploadFile() {
 
-        const { userFile: userFile } = this.state;
+        const userFile = this.state.userFile;
 
         let dest;
 
         if (userFile.type.match(/^image\/.*$/)) {
-            dest = 'images';
+            dest = `images/${this.state.owner}`;
+        } else if (userFile.type.match(/^.*\/pdf$/)) {
+            dest = `pdf/${this.state.owner}`;
         } else {
-            dest = 'text'
+            dest = `text/${this.state.owner}`
         }
 
 
@@ -96,6 +98,7 @@ class CreateDoc extends Component {
         if (e.target.files[0]) {
             const userFile = e.target.files[0];
             this.setState({ userFile: userFile });
+            console.log(userFile)
         }
     }
 
