@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import './Home.css'
-import { AppDB } from "./db-init";
+import { AppDB, AppAUTH } from "./db-init";
 import CreateDoc from './CreateDoc';
 import File from './File';
-import Selected from './Selected'
+import Selected from './Selected';
+import { withRouter } from 'react-router-dom';
 
 
 class Home extends Component {
@@ -131,6 +132,10 @@ class Home extends Component {
 
     signoutButtonHandler(ev) {
         console.log('signout button pressed')
+        AppAUTH.signOut().then(() => {
+            console.log('signed out');
+            this.props.history.goBack();
+        })
     }
 
     menuItemHandler(ev) {
