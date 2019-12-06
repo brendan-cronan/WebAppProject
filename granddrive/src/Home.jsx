@@ -8,7 +8,7 @@ import Selected from './Selected';
 import Button from '@material-ui/core/Button';
 
 import {
-    CloudUpload, Settings, ExitToApp, Share, Description, RecentActors, OpenInNew
+    CloudUpload, Settings, ExitToApp, Share, Description, RecentActors, OpenInNew, AllInbox
 } from '@material-ui/icons';
 
 
@@ -42,7 +42,6 @@ class Home extends Component {
                 <section id="toolbar">
                     <Button id="uploadDoc" startIcon={<CloudUpload />} className="menuitem" onClick={this.newButtonHandler.bind(this)}>Upload</Button>
                     <span className="filler"></span>
-                    <Button startIcon={<Settings />} className="menuitem" onClick={this.optionsButtonHandler.bind(this)}>Options</Button>
                     <Button startIcon={<ExitToApp />} className="menuitem" onClick={this.signoutButtonHandler.bind(this)}>Sign Out</Button>
                 </section>
                 <section id="navpanel">
@@ -50,7 +49,7 @@ class Home extends Component {
                     <Button id="myDocs" startIcon={<Description />} variant="contained" color="primary" className="navitem" onClick={this.menuItemHandler.bind(this)}>My Documents</Button>
                     <Button id="shared" startIcon={<Share />} variant="contained" color="primary" className="navitem" onClick={this.menuItemHandler.bind(this)}>Shared with Me</Button>
 
-                    <Button id="all" startIcon={<RecentActors />} variant="contained" color="primary" className="navitem" onClick={this.menuItemHandler.bind(this)}>All</Button>
+                    <Button id="all" startIcon={<AllInbox />} variant="contained" color="primary" className="navitem" onClick={this.menuItemHandler.bind(this)}>All</Button>
 
                 </section>
 
@@ -147,10 +146,6 @@ class Home extends Component {
     newButtonHandler(ev) {
         this.menuItemHandler(ev);
         console.log('new button pressed');
-    }
-
-    optionsButtonHandler(ev) {
-        console.log('options button pressed')
     }
 
     signoutButtonHandler(ev) {
