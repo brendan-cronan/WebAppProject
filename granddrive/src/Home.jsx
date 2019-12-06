@@ -3,9 +3,12 @@ import './Home.css'
 import { AppDB } from "./db-init";
 import CreateDoc from './CreateDoc';
 import File from './File';
+
 import Button from '@material-ui/core/Button';
 
-import {CloudUpload,Settings, ExitToApp, Share, Description, RecentActors} from '@material-ui/icons';
+import {
+    CloudUpload,Settings, ExitToApp, Share, Description, RecentActors,OpenInNew
+} from '@material-ui/icons';
 
 
 
@@ -46,6 +49,7 @@ class Home extends Component {
                     
 
                 </section>
+                
                 <section id="main">
 
                     <div className={this.state.activeTab === "myDocs" ? "" : "inactive"}>
@@ -72,9 +76,6 @@ class Home extends Component {
                     <div className={this.state.activeTab === "uploadDoc" ? "" : "inactive"}>
                         <CreateDoc userEmail={this.state.userEmail} updateTab={this.updateTab.bind(this)} />
                     </div>
-                </section>
-                <section id="most-recent">
-
                 </section>
             </div>);
     }
