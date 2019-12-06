@@ -1,11 +1,25 @@
 import React, { Component } from "react";
-import Button from '@material-ui/core/Button';
+import Button from "@material-ui/core/Button";
+
+import {
+    ExpansionPanel,
+    ExpansionPanelSummary,
+    ExpansionPanelDetails,
+} from "@material-ui/core";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import Typography from "@material-ui/core/Typography";
 
 
-import { ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails} from '@material-ui/core';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Typography from '@material-ui/core/Typography';
 
+
+
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableRow
+} from "@material-ui/core";
 
 
 
@@ -17,7 +31,7 @@ class File extends Component {
             docName: this.props.docName,
             docDesc: this.props.docDesc,
             url: this.props.url
-        }
+        };
     }
 
     render() {
@@ -28,27 +42,43 @@ class File extends Component {
 
                 <ExpansionPanel>
                     <ExpansionPanelSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    id="panel1a-header"
+                        expandIcon={<ExpandMoreIcon />}
+                        id="panel1a-header"
                     >
-                    <Typography className="type">{this.state.docName}</Typography>
+                        <Typography className="type">{this.state.docName}</Typography>
                     </ExpansionPanelSummary>
+                    {/* Contents Go Here */}
                     <ExpansionPanelDetails>
-                    <Typography>
+                        <Table>
+                            <TableHead>
+                                <TableCell>Owner</TableCell>
+                                <TableCell>Shared With</TableCell>
+                                <TableCell>
+                                    <Button variant="outlined" color="secondary" onClick={() => this.openFile()}>Open</Button>
+                                </TableCell>
+                            </TableHead>
+                            <TableBody>
+                                <TableRow>
+                                    <TableCell>{this.state.owner}</TableCell>
+                                    <TableCell>{this.state.sharedWith}</TableCell>
+                                </TableRow>
+
+
+
+
+
+
+
+
+                            </TableBody>
+                        </Table>
+
+                        {/* <Typography>
                         {this.state.docDesc}
-                    </Typography>
+                    </Typography> */}
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
-                
-
-
-
-
-
-
-
-
-            </div >
+            </div>
         );
     }
 
