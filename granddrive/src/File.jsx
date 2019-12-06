@@ -38,7 +38,6 @@ class File extends Component {
             sharedWith: this.props.sharedWith,
             url: this.props.url,
             delete: this.props.delete,
-            recentlySelectedHandler: this.props.recentlySelectedHandler
         }
     }
 
@@ -75,7 +74,7 @@ class File extends Component {
                                     <TableCell>Owner</TableCell>
                                     <TableCell>Shared With</TableCell>
                                     <TableCell>
-                                        <Button variant="outlined" color="primary" onClick={() => this.changeSelected()}>Open</Button>
+                                        <Button variant="outlined" color="primary" onClick={() => this.openFile()}>Open</Button>
                                     </TableCell>
                                     <TableCell>
                                         {this.delete &&
@@ -111,8 +110,8 @@ class File extends Component {
         );
     }
 
-    changeSelected() {
-        this.state.recentlySelectedHandler(this.state);
+    openFile() {
+        window.open(this.state.url, "_blank");
     }
 
     deleteSelected() {

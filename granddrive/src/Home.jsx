@@ -68,7 +68,7 @@ class Home extends Component {
                                 sharedWith={x.sharedWith}
                                 url={x.url}
                                 delete={true}
-                                recentlySelectedHandler={this.recentlySelectedHandler.bind(this)}
+
                             />)
                         }
                     </div>
@@ -85,7 +85,7 @@ class Home extends Component {
                                 sharedWith={x.sharedWith}
                                 url={x.url}
                                 delete={false}
-                                recentlySelectedHandler={this.recentlySelectedHandler.bind(this)}
+
                             />)
                         }
                     </div >
@@ -100,7 +100,7 @@ class Home extends Component {
                                 sharedWith={x.sharedWith}
                                 url={x.url}
                                 delete={x.ownerEmail === this.state.userEmail}
-                                recentlySelectedHandler={this.recentlySelectedHandler.bind(this)}
+
                             />)
                         }
                     </div>
