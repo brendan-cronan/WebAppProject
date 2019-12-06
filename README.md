@@ -12,17 +12,17 @@ etc.
 
 # Project Description:
 ## Outline
-We aim to emulate certain features of Google Docs to create a cloud-based collaboration application.
+We aim to emulate certain features of Google Drive to create a cloud-based file sharing application.
 
 ## 1
-We will use both a email-based sign in and a Google authentication service for user authentication.
+We will use both a email-based sign in for user authentication.
 
 ## 2
-We are using Firestore.
-We aim to have a table of Projects and a table of users and documents related to those projects to provide a simple way to collaborate on multiple documents at once.
+We are using RealtimeDB and Google Storage.
+We aim to have a table of Documents and a table of users
 
 ## 3
-We aim to provide a list of users currently working on a given document and to also provide consistent updates whenever a user makes a change to one of these documents.  
+We aim to provide a list of documents either uploaded or shared with the user 
 
 ## 4
 Private data would include: personal documents not shared with any other users
@@ -34,10 +34,10 @@ We plan to use React.js
 ## 6
 Our tables will be formatted as such:
 
-| Project Name        | Documents           | Users  
+| Document       | Description          | Shared With 
 | ------------- |:-------------:| -----:
-| English Presentation      | Presentation.ppt | Joe, Cindy 
-| ..      | Proposal.txt | Joe, Cindy, Matt 
+| Presentation.ppt      | EnglishPresentation | Joe, Cindy 
+| Proposal.txt     | .. | Joe, Cindy, Matt 
 
 ## 7 
 Forms will be utilized to submit documents and alter them as required.
@@ -48,8 +48,6 @@ We will utilize CSS to make our application look sleek and user friendly.
 
 # User updates
 Users will be able to update the DB through several options.
-1. Adding/Removing a project or document.
+1. Adding/Removing a document.
 2. Managing Group Members.
-3. Changing a document from private to public.
-4. Altering the documents themselves.
-5. etc.
+3. etc.
