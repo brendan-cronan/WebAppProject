@@ -73,7 +73,7 @@ class File extends Component {
                                 <TableRow>
                                     <TableCell>{this.state.owner}</TableCell>
                                     <TableCell>
-                                        {
+                                        {this.state.sharedWith !== undefined &&
                                             this.state.sharedWith.map((user) => (
                                                 <Chip key={user} label={user} />
                                             ))}
@@ -81,7 +81,7 @@ class File extends Component {
                                 </TableRow>
                                 <TableRow>
                                     <TableCell>
-                                        <Button startIcon={<OpenInNew />} variant="outlined" color="primary" onClick={() => this.changeSelected()}>Open</Button>
+                                        <Button startIcon={<OpenInNew />} variant="outlined" color="primary" onClick={() => this.openFile()}>Open</Button>
                                     </TableCell>
                                     <TableCell>
                                         <Button startIcon={<HighlightOff />} variant="outlined" color="secondary" onClick={() => this.deleteSelected()}>Delete</Button>
