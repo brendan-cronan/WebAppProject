@@ -3,6 +3,10 @@ import './Home.css'
 import { AppDB } from "./db-init";
 import CreateDoc from './CreateDoc';
 import File from './File';
+import Button from '@material-ui/core/Button';
+
+import {CloudUpload,Settings, ExitToApp, Share, Description, RecentActors} from '@material-ui/icons';
+
 
 
 class Home extends Component {
@@ -30,15 +34,16 @@ class Home extends Component {
             <div id="container">
 
                 <section id="toolbar">
-                    <button id="uploadDoc" className="menuitem" onClick={this.newButtonHandler.bind(this)}>Upload</button>
+                    <Button id="uploadDoc" startIcon={<CloudUpload />} className="menuitem" onClick={this.newButtonHandler.bind(this)}>Upload</Button>
                     <span className="filler"></span>
-                    <button className="menuitem" onClick={this.optionsButtonHandler.bind(this)}>Options</button>
-                    <button className="menuitem" onClick={this.signoutButtonHandler.bind(this)}>Sign Out</button>
+                    <Button startIcon={<Settings />} className="menuitem" onClick={this.optionsButtonHandler.bind(this)}>Options</Button>
+                    <Button startIcon={<ExitToApp />} className="menuitem" onClick={this.signoutButtonHandler.bind(this)}>Sign Out</Button>
                 </section>
                 <section id="navpanel">
-                    <span id="myDocs" className="navitem" onClick={this.menuItemHandler.bind(this)}>My Documents</span>
-                    <span id="shared" className="navitem" onClick={this.menuItemHandler.bind(this)}>Shared with Me</span>
-                    <span id="recent" className="navitem" onClick={this.menuItemHandler.bind(this)}>Recent</span>
+                    <Button id="myDocs" startIcon={<Description />} variant="contained" color="Primary" className="navitem" onClick={this.menuItemHandler.bind(this)}>My Documents</Button>
+                    <Button id="shared" startIcon={<Share />} variant="contained" color="Primary" className="navitem" onClick={this.menuItemHandler.bind(this)}>Shared with Me</Button>
+                    <Button id="recent" startIcon={<RecentActors />} variant="contained" color="Primary" className="navitem" onClick={this.menuItemHandler.bind(this)}>Recent Files</Button>
+                    
 
                 </section>
                 <section id="main">
