@@ -81,11 +81,13 @@ class CreateDoc extends Component {
                         docName: this.state.docName,
                         docDesc: this.state.docDesc,
                         ownerEmail: this.state.owner,
-                        url: url
+                        sharedWith: this.state.sharedWith,
+                        url: url,
+
 
                     });
                 this.state.updateTab('myDocs');
-                this.setState({ docName: '', docDesc: '', userFile: null, url: '' });
+                this.setState({ docName: '', docDesc: '', userFile: null, url: '', sharedWith: [] });
                 document.getElementById('docName').value = '';
                 document.getElementById('docDesc').value = '';
                 document.getElementById('file').value = null;
