@@ -50,7 +50,15 @@ class Home extends Component {
                         {this.state.docs.filter(doc => {
                             return doc.ownerEmail === this.state.userEmail;
                         }).map((x, i) =>
-                            <File key={i} owner={x.ownerEmail} docName={x.docName} docDesc={x.docDesc} sharedWith={x.sharedWith} url={x.url} recentlySelectedHandler={this.recentlySelectedHandler.bind(this)} />)
+                            <File key={i}
+                                owner={x.ownerEmail}
+                                docName={x.docName}
+                                docDesc={x.docDesc}
+                                sharedWith={x.sharedWith}
+                                url={x.url}
+                                delete={true}
+                                recentlySelectedHandler={this.recentlySelectedHandler.bind(this)}
+                            />)
                         }
                     </div>
                     <div className={this.state.activeTab === "shared" ? "" : "inactive"}>
@@ -58,7 +66,15 @@ class Home extends Component {
                         {this.state.docs.filter(doc => {
                             return doc.ownerEmail !== this.state.userEmail;
                         }).map((x, i) =>
-                            <File key={i} owner={x.ownerEmail} docName={x.docName} docDesc={x.docDesc} sharedWith={x.sharedWith} url={x.url} recentlySelectedHandler={this.recentlySelectedHandler.bind(this)} />)
+                            <File key={i}
+                                owner={x.ownerEmail}
+                                docName={x.docName}
+                                docDesc={x.docDesc}
+                                sharedWith={x.sharedWith}
+                                url={x.url}
+                                delete={false}
+                                recentlySelectedHandler={this.recentlySelectedHandler.bind(this)}
+                            />)
                         }
                     </div >
                     <div className={this.state.activeTab === "recent" ? "" : "inactive"}>

@@ -9,14 +9,23 @@ class File extends Component {
             docDesc: this.props.docDesc,
             sharedWith: this.props.sharedWith,
             url: this.props.url,
+            delete: this.props.delete,
             recentlySelectedHandler: this.props.recentlySelectedHandler
         }
     }
 
     render() {
+
+        this.delete = this.state.delete;
+
         return (
             <div >
-                {this.state.docName} {this.state.docDesc} <button onClick={() => this.changeSelected()}>Open</button>
+                {this.state.docName} {this.state.docDesc}
+                {this.delete
+                    &&
+                    <button>delete</button>
+                }
+                <button onClick={() => this.changeSelected()}>Open</button>
 
             </div >
         );
