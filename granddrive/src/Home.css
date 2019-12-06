@@ -13,7 +13,7 @@ body {
   height: 100%;
   display: grid;
   grid-template-rows: auto 1fr auto;
-  grid-template-columns: 1fr 6fr 1fr;
+  grid-template-columns: 1fr 6fr;
 }
 
 #toolbar {

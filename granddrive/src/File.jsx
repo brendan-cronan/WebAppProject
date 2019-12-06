@@ -79,6 +79,7 @@ class File extends Component {
                                             ))}
                                     </TableCell>
                                 </TableRow>
+                                
                                 <TableRow>
                                     <TableCell>
                                         <Button startIcon={<OpenInNew />} variant="outlined" color="primary" onClick={() => this.openFile()}>Open</Button>
