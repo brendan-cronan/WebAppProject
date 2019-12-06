@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { AppDB } from "./db-init";
 
 class Selected extends Component {
     constructor(props) {
