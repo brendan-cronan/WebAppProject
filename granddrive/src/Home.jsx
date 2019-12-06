@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import './Home.css'
-import { AppDB } from "./db-init";
+import { AppDB, AppAUTH } from "./db-init";
 import CreateDoc from './CreateDoc';
 import File from './File';
+import Selected from './Selected';
+import { withRouter } from 'react-router-dom';
 
 import Button from '@material-ui/core/Button';
 
@@ -14,14 +16,16 @@ import {
 
 class Home extends Component {
 
+
+
     constructor(props) {
         super(props);
+        this.selected = React.createRef();
         this.state = {
             userEmail: this.props.location.state.userEmail,
             docs: [],
-            activeTab: "myDocs"
+            activeTab: "myDocs",
         }
-
 
     }
 
@@ -31,7 +35,6 @@ class Home extends Component {
     }
 
     render() {
-
         return (
 
             <div id="container">
@@ -43,10 +46,15 @@ class Home extends Component {
                     <Button startIcon={<ExitToApp />} className="menuitem" onClick={this.signoutButtonHandler.bind(this)}>Sign Out</Button>
                 </section>
                 <section id="navpanel">
-                    <Button id="myDocs" startIcon={<Description />} variant="contained" color="Primary" className="navitem" onClick={this.menuItemHandler.bind(this)}>My Documents</Button>
+
+                  
+                  <Button id="myDocs" startIcon={<Description />} variant="contained" color="Primary" className="navitem" onClick={this.menuItemHandler.bind(this)}>My Documents</Button>
                     <Button id="shared" startIcon={<Share />} variant="contained" color="Primary" className="navitem" onClick={this.menuItemHandler.bind(this)}>Shared with Me</Button>
                     <Button id="recent" startIcon={<RecentActors />} variant="contained" color="Primary" className="navitem" onClick={this.menuItemHandler.bind(this)}>Recent Files</Button>
                     
+                   /* <span id="myDocs" className="navitem" onClick={this.menuItemHandler.bind(this)}>My Documents</span>
+                    <span id="shared" className="navitem" onClick={this.menuItemHandler.bind(this)}>Shared with Me</span>
+                    <span id="all" className="navitem" onClick={this.menuItemHandler.bind(this)}>All</span>*/
 
                 </section>
                 
@@ -56,26 +64,59 @@ class Home extends Component {
                         <h2>My Documents</h2>
                         {this.state.docs.filter(doc => {
                             return doc.ownerEmail === this.state.userEmail;
-                        }).
-                            map((x, i) =>
-                                <File key={i} owner={x.ownerEmail} docName={x.docName} docDesc={x.docDesc} url={x.url} />)
+                        }).map((x) =>
+                            <File key={x.mykey}
+                                myKey={x.mykey}
+                                owner={x.ownerEmail}
+                                docName={x.docName}
+                                docDesc={x.docDesc}
+                                sharedWith={x.sharedWith}
+                                url={x.url}
+                                delete={true}
+                                recentlySelectedHandler={this.recentlySelectedHandler.bind(this)}
+                            />)
                         }
                     </div>
                     <div className={this.state.activeTab === "shared" ? "" : "inactive"}>
                         <h2>Shared with Me</h2>
                         {this.state.docs.filter(doc => {
                             return doc.ownerEmail !== this.state.userEmail;
-                        }).
-                            map((x, i) =>
-                                <File key={i} owner={x.ownerEmail} docName={x.docName} docDesc={x.docDesc} url={x.url} />)
+                        }).map((x) =>
+                            <File key={x.mykey}
+                                myKey={x.mykey}
+                                owner={x.ownerEmail}
+                                docName={x.docName}
+                                docDesc={x.docDesc}
+                                sharedWith={x.sharedWith}
+                                url={x.url}
+                                delete={false}
+                                recentlySelectedHandler={this.recentlySelectedHandler.bind(this)}
+                            />)
                         }
                     </div >
-                    <div className={this.state.activeTab === "recent" ? "" : "inactive"}>
-                        Recent documents go here
+                    <div className={this.state.activeTab === "all" ? "" : "inactive"}>
+                        <h2>All Viewable Documents</h2>
+                        {this.state.docs.map((x) =>
+                            <File key={x.mykey}
+                                myKey={x.mykey}
+                                owner={x.ownerEmail}
+                                docName={x.docName}
+                                docDesc={x.docDesc}
+                                sharedWith={x.sharedWith}
+                                url={x.url}
+                                delete={x.ownerEmail === this.state.userEmail}
+                                recentlySelectedHandler={this.recentlySelectedHandler.bind(this)}
+                            />)
+                        }
                     </div>
                     <div className={this.state.activeTab === "uploadDoc" ? "" : "inactive"}>
-                        <CreateDoc userEmail={this.state.userEmail} updateTab={this.updateTab.bind(this)} />
+                        <CreateDoc userEmail={this.state.userEmail} updateTab={this.updateTabHandler.bind(this)} />
                     </div>
+                </section>
+
+                <section id="most-recent">
+                    <Selected ref={this.selected}
+                    />
                 </section>
             </div>);
     }
@@ -118,16 +159,26 @@ class Home extends Component {
 
     signoutButtonHandler(ev) {
         console.log('signout button pressed')
+        AppAUTH.signOut().then(() => {
+            console.log('signed out');
+            this.props.history.goBack();
+        })
     }
 
     menuItemHandler(ev) {
         let tab = ev.currentTarget.id;
-        this.updateTab(tab);
+        this.updateTabHandler(tab);
     }
 
-    updateTab(tab) {
+    updateTabHandler(tab) {
         console.log(`switching active tab to ${tab}`)
         this.setState({ activeTab: tab });
+    }
+
+    recentlySelectedHandler(ev) {
+        console.log(ev)
+        this.selected.current.updateState(ev);
+        //this.setState({ mostRecentlySelected: ev });
     }
 }
 

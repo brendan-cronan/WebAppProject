@@ -31,7 +31,7 @@ class CreateDoc extends Component {
 
             <div>
                 <label>Share With:</label>
-                <input type="text" id="shareWith" name="shareWith" />
+                <input type="text" id="sharedWith" name="sharedWith" />
             </div>
 
             <div>
@@ -52,14 +52,16 @@ class CreateDoc extends Component {
 
     uploadFile() {
 
-        const { userFile: userFile } = this.state;
+        const userFile = this.state.userFile;
 
         let dest;
 
         if (userFile.type.match(/^image\/.*$/)) {
-            dest = 'images';
+            dest = `images/${this.state.owner}`;
+        } else if (userFile.type.match(/^.*\/pdf$/)) {
+            dest = `pdf/${this.state.owner}`;
         } else {
-            dest = 'text'
+            dest = `text/${this.state.owner}`
         }
 
 
@@ -79,11 +81,13 @@ class CreateDoc extends Component {
                         docName: this.state.docName,
                         docDesc: this.state.docDesc,
                         ownerEmail: this.state.owner,
-                        url: url
+                        sharedWith: ["test"],
+                        url: url,
+
 
                     });
                 this.state.updateTab('myDocs');
-                this.setState({ docName: '', docDesc: '', userFile: null, url: '' });
+                this.setState({ docName: '', docDesc: '', userFile: null, url: '', sharedWith: [] });
                 document.getElementById('docName').value = '';
                 document.getElementById('docDesc').value = '';
                 document.getElementById('file').value = null;
@@ -96,6 +100,7 @@ class CreateDoc extends Component {
         if (e.target.files[0]) {
             const userFile = e.target.files[0];
             this.setState({ userFile: userFile });
+            console.log(userFile)
         }
     }
 
