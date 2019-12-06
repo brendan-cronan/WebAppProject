@@ -78,7 +78,10 @@ class File extends Component {
                                         <Button variant="outlined" color="primary" onClick={() => this.changeSelected()}>Open</Button>
                                     </TableCell>
                                     <TableCell>
-                                        <Button variant="outlined" color="secondary" onClick={() => this.deleteSelected()}>Delete</Button>
+                                        {this.delete &&
+                                            <Button variant="outlined" color="secondary" onClick={() => this.deleteSelected()}>Delete</Button>
+                                        }
+
                                     </TableCell>
                                 </TableRow>
                             </TableHead>
