@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button';
 
 import {
 
-    CloudUpload, ExitToApp, Share, Description, RecentActors, OpenInNew, AllInbox
+    CloudUpload, ExitToApp, Share, Description, AllInbox
 
 } from '@material-ui/icons';
 
@@ -108,8 +108,7 @@ class Home extends Component {
                     </div>
                 </section>
 
-                <section id="most-recent">
-                </section>
+                
             </div>);
     }
 
