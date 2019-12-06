@@ -3,18 +3,21 @@ import './Home.css'
 import { AppDB } from "./db-init";
 import CreateDoc from './CreateDoc';
 import File from './File';
+import Selected from './Selected'
 
 
 class Home extends Component {
 
+
+
     constructor(props) {
         super(props);
+        this.selected = React.createRef();
         this.state = {
             userEmail: this.props.location.state.userEmail,
             docs: [],
-            activeTab: "myDocs"
+            activeTab: "myDocs",
         }
-
 
     }
 
@@ -24,7 +27,6 @@ class Home extends Component {
     }
 
     render() {
-
         return (
 
             <div id="container">
@@ -47,29 +49,28 @@ class Home extends Component {
                         <h2>My Documents</h2>
                         {this.state.docs.filter(doc => {
                             return doc.ownerEmail === this.state.userEmail;
-                        }).
-                            map((x, i) =>
-                                <File key={i} owner={x.ownerEmail} docName={x.docName} docDesc={x.docDesc} url={x.url} />)
+                        }).map((x, i) =>
+                            <File key={i} owner={x.ownerEmail} docName={x.docName} docDesc={x.docDesc} url={x.url} recentlySelectedHandler={this.recentlySelectedHandler.bind(this)} />)
                         }
                     </div>
                     <div className={this.state.activeTab === "shared" ? "" : "inactive"}>
                         <h2>Shared with Me</h2>
                         {this.state.docs.filter(doc => {
                             return doc.ownerEmail !== this.state.userEmail;
-                        }).
-                            map((x, i) =>
-                                <File key={i} owner={x.ownerEmail} docName={x.docName} docDesc={x.docDesc} url={x.url} />)
+                        }).map((x, i) =>
+                            <File key={i} owner={x.ownerEmail} docName={x.docName} docDesc={x.docDesc} url={x.url} recentlySelectedHandler={this.recentlySelectedHandler.bind(this)} />)
                         }
                     </div >
                     <div className={this.state.activeTab === "recent" ? "" : "inactive"}>
                         Recent documents go here
                     </div>
                     <div className={this.state.activeTab === "uploadDoc" ? "" : "inactive"}>
-                        <CreateDoc userEmail={this.state.userEmail} updateTab={this.updateTab.bind(this)} />
+                        <CreateDoc userEmail={this.state.userEmail} updateTab={this.updateTabHandler.bind(this)} />
                     </div>
                 </section>
                 <section id="most-recent">
-
+                    <Selected ref={this.selected}
+                    />
                 </section>
             </div>);
     }
@@ -116,12 +117,18 @@ class Home extends Component {
 
     menuItemHandler(ev) {
         let tab = ev.currentTarget.id;
-        this.updateTab(tab);
+        this.updateTabHandler(tab);
     }
 
-    updateTab(tab) {
+    updateTabHandler(tab) {
         console.log(`switching active tab to ${tab}`)
         this.setState({ activeTab: tab });
+    }
+
+    recentlySelectedHandler(ev) {
+        console.log(ev)
+        this.selected.current.updateState(ev);
+        //this.setState({ mostRecentlySelected: ev });
     }
 }
 
