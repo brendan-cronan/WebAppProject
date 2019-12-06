@@ -4,7 +4,6 @@ import { AppDB, AppAUTH } from "./db-init";
 import CreateDoc from './CreateDoc';
 import File from './File';
 import Selected from './Selected';
-import { withRouter } from 'react-router-dom';
 
 import Button from '@material-ui/core/Button';
 
