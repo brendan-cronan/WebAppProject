@@ -7,6 +7,7 @@ class File extends Component {
             owner: this.props.owner,
             docName: this.props.docName,
             docDesc: this.props.docDesc,
+            sharedWith: this.props.sharedWith,
             url: this.props.url,
             recentlySelectedHandler: this.props.recentlySelectedHandler
         }

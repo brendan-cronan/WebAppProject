@@ -8,6 +8,7 @@ class Selected extends Component {
             owner: null,
             docName: null,
             docDesc: null,
+            sharedWith: null,
             url: null
         }
     }
@@ -18,6 +19,7 @@ class Selected extends Component {
                 {this.state.docName}
                 {this.state.docDesc}
                 {this.state.owner}
+                {this.state.sharedWith}
                 {this.state.url !== null ? <button onClick={() => this.openFile()}>View</button> : null}
 
             </div>
@@ -25,7 +27,7 @@ class Selected extends Component {
     }
 
     updateState(ev) {
-        this.setState({ owner: ev.owner, docName: ev.docName, docDesc: ev.docDesc, url: ev.url })
+        this.setState({ owner: ev.owner, docName: ev.docName, docDesc: ev.docDesc, sharedWith: ev.sharedWith, url: ev.url })
     }
 
     openFile() {
