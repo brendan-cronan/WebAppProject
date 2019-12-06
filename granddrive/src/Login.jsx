@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { AppDB, AppAUTH } from "./db-init";
 
+
+import {TextField, Button, Card, CardContent, Typography} from '@material-ui/core/';
+
 class Login extends Component {
     constructor(props) {
         super(props);
@@ -13,20 +16,21 @@ class Login extends Component {
     render() {
         return (
             <div>
-                <h2>Login page</h2>
-                <div>
-                    <label>Email</label>
-                    <input type="text" name="userEmail" value={this.state.userEmail}
+                <Typography style={{marginTop:200}} variant ='h2' color= 'primary' align='center'>Login page</Typography>
+                <Card align='center' style={{marginTop:50 }}>
+                    <CardContent>
+                    
+                    <TextField style={{marginRight:10}} variant = 'filled' type="text" label='Email' name="userEmail" value={this.state.userEmail}
                         onChange={(e) => this.updateFormData(e)} />
-                    <label>Password</label>
-                    <input type="password" name="userPassword" value={this.state.userPassword}
+                    
+                    <TextField type="password" variant = 'filled' label='Password' name="userPassword" value={this.state.userPassword}
                         onChange={(e) => this.updateFormData(e)} />
                     <div>
-                        <button onClick={() => this.doSignUp()}>SignUp</button>
-                        <button onClick={() => this.doSignIn()}>SignIn</button>
+                        <Button style={{width:200, marginRight:5}} variant= 'outlined' onClick={() => this.doSignUp()}>SignUp</Button>
+                        <Button style={{width:200, marginLeft:5}} variant= 'contained' color='primary' onClick={() => this.doSignIn()}>SignIn</Button>
                     </div>
-
-                </div>
+                    </CardContent>
+                </Card>
             </div>
         );
     }

@@ -4,7 +4,8 @@ import { AppDB, AppAUTH } from "./db-init";
 import CreateDoc from './CreateDoc';
 import File from './File';
 
-import Button from '@material-ui/core/Button';
+import { Button, ButtonGroup } from '@material-ui/core/';
+
 
 import {
 
@@ -35,9 +36,13 @@ class Home extends Component {
         AppDB.ref("Users").on("child_removed", (s) => this.userRemoveListener(s));
     }
 
+    
+
+
+    
     render() {
         return (
-
+            
 
             <div id="container">
 
@@ -47,12 +52,12 @@ class Home extends Component {
                     <Button startIcon={<ExitToApp />} className="menuitem" onClick={this.signoutButtonHandler.bind(this)}>Sign Out</Button>
                 </section>
                 <section id="navpanel">
+                    <ButtonGroup style={{display: "flex", flexDirection: "column"}} >
+                        <Button id="myDocs" size="large" style={{ marginBottom: 2, height:80}} startIcon={<Description />} variant="contained" color="primary" className="navitem" onClick={this.menuItemHandler.bind(this)}>My Documents</Button>
+                        <Button id="shared" size="large" style={{ marginBottom: 2, height:80 }} startIcon={<Share />} variant="contained" color="primary" className="navitem" onClick={this.menuItemHandler.bind(this)}>Shared with Me</Button>
 
-                    <Button id="myDocs" startIcon={<Description />} variant="contained" color="primary" className="navitem" onClick={this.menuItemHandler.bind(this)}>My Documents</Button>
-                    <Button id="shared" startIcon={<Share />} variant="contained" color="primary" className="navitem" onClick={this.menuItemHandler.bind(this)}>Shared with Me</Button>
-
-                    <Button id="all" startIcon={<AllInbox />} variant="contained" color="primary" className="navitem" onClick={this.menuItemHandler.bind(this)}>All</Button>
-
+                        <Button id="all" size="large" style={{ marginBottom: 0, height:80 }} startIcon={<AllInbox />} variant="contained" color="primary" className="navitem" onClick={this.menuItemHandler.bind(this)}>All</Button>
+                        </ButtonGroup>
                 </section>
 
                 <section id="main">
@@ -113,7 +118,7 @@ class Home extends Component {
                     </div>
                 </section>
 
-                
+
             </div>);
     }
 

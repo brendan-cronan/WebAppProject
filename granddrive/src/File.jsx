@@ -52,18 +52,21 @@ class File extends Component {
         return (
             <div>
 
-                <ExpansionPanel>
+                <ExpansionPanel style={{marginBottom:8}}>
                     <ExpansionPanelSummary
                         expandIcon={<ExpandMoreIcon />}
                         id="panel1a-header"
                     >
                         <Typography className="type">{this.state.docName}</Typography>
                     </ExpansionPanelSummary>
+
                     {/* Contents Go Here */}
                     <ExpansionPanelDetails>
+
                         <Table>
                             <TableHead>
                                 <TableRow>
+                                    <TableCell>Description</TableCell>
                                     <TableCell>Owner</TableCell>
                                     <TableCell>Shared With</TableCell>
 
@@ -71,6 +74,7 @@ class File extends Component {
                             </TableHead>
                             <TableBody>
                                 <TableRow>
+                                    <TableCell><Typography>{this.state.docDesc}</Typography></TableCell>
                                     <TableCell>{this.state.owner}</TableCell>
                                     <TableCell>
                                         {this.state.sharedWith !== undefined &&
@@ -79,7 +83,7 @@ class File extends Component {
                                             ))}
                                     </TableCell>
                                 </TableRow>
-                                
+
                                 <TableRow>
                                     <TableCell>
                                         <Button startIcon={<OpenInNew />} variant="outlined" color="primary" onClick={() => this.openFile()}>Open</Button>
@@ -99,9 +103,6 @@ class File extends Component {
                             </TableBody>
                         </Table>
 
-                        {/* <Typography>
-                        {this.state.docDesc}
-                    </Typography> */}
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
             </div>

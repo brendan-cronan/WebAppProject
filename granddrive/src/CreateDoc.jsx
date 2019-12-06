@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { AppDB, AppStorage } from "./db-init";
 
 
-import {TextField, Button, Card, CardContent} from '@material-ui/core/';
-import {Autocomplete} from '@material-ui/lab/';
+import { TextField, Button, Card, CardContent } from '@material-ui/core/';
+import { Autocomplete } from '@material-ui/lab/';
 
-import {AddCircle} from '@material-ui/icons';
+import { AddCircle } from '@material-ui/icons';
 
 class CreateDoc extends Component {
 
@@ -25,73 +25,69 @@ class CreateDoc extends Component {
 
     render() {
         return (<div>
-            <div>
-                
-                <TextField id="docName" variant = "filled" label="Document Name" name="docName" onChange={(e) => this.updateFormData(e)} />
+            <div align='center' >
+                <TextField id="docName" style={{ width: 400 , marginBottom:5 }} variant="filled" label="Document Name" name="docName" onChange={(e) => this.updateFormData(e)} />
             </div>
-            <div>
-            <TextField id="docDesc" variant = "filled" label="Document Description" name="docDesc" onChange={(e) => this.updateFormData(e)} />
+            <div align='center'>
+                <TextField id="docDesc" style={{ width: 400 }} variant="filled" label="Document Description" name="docDesc" onChange={(e) => this.updateFormData(e)} />
             </div>
 
-            <div>
-                {/* <select id="sharedWith" name="sharedWith">
-                    {this.props.users.filter((user) => {
-                        return !this.state.sharedWith.includes(user.email) && user.email !== this.state.owner;
-                    }).map((user) =>
-                        <option key={user.email} value={user.email}>{user.email}</option>
-                    )}
-                </select> */}
-
-            
+            <div align='center'>
+            <Card style={{ width: 400, marginBottom: 15, marginTop: 30 }} align='center'>
+            <CardContent>
             <Autocomplete
-                id="sharedWith"
-                options={this.props.users.filter((user) => {
-                    return user.email !== this.state.owner;
-                }).map((user) =>
-                user.email
-                )}
-                
+                    id="sharedWith"
+                    options={this.props.users.filter((user) => {
+                        return user.email !== this.state.owner;
+                    }).map((user) =>
+                        user.email
+                    )}
 
-                style={{ width: 230, marginTop: 30 }}
-                renderInput={params => (
-                    <TextField {...params} label="User" variant="outlined" fullWidth />
-                )}
+
+                    style={{ width: 370, marginTop: 30 }}
+                    renderInput={params => (
+                        <TextField {...params} label="User" variant="outlined" fullWidth />
+                    )}
                 />
 
-                <Button startIcon = {<AddCircle />} color="primary" onClick={() => this.addShared()}>Add</Button>
+                <Button startIcon={<AddCircle />} color="primary" onClick={() => this.addShared()}>Add</Button>
+
+                
+                </CardContent>
+                </Card>
             </div>
 
-            <div>
-                
+            <div align='center'>
                 <input
                     accept="file/*"
                     id="file"
                     multiple
                     type="file"
-                    
-                    style={{display: 'none'}}
+
+                    style={{ display: 'none' }}
                     onChange={(e) => this.updateFile(e)}
                 />
-                <Card style={{width: 250, marginBottom: 15 , marginTop: 30}}>
+
+                <Card style={{ width: 400, marginBottom: 15, marginTop: 30 }} align='center'>
                     <CardContent>
-                    <label htmlFor="file">
-                        <Button variant="outlined" name ="file" color="primary" component="span">
-                        Choose File
+                        <label htmlFor="file" style={{ marginLeft: 10 }}>
+                            <Button variant="outlined" name="file" style={{ marginRight: 10 }} color="primary" component="span">
+                                Choose File
                         </Button>
-                    </label>
-                    <label id ="file_name" name ="file_name">
-                        File
+                        </label>
+                        <label id="file_name" name="file_name">
+                            File
                     </label>
                     </CardContent>
                 </Card>
-                
+
 
 
 
             </div>
 
-            <div>
-                <Button variant ="contained" color="primary" onClick={() => this.uploadFile()}>Upload</Button>
+            <div align='center'>
+                <Button variant="contained" color="primary" onClick={() => this.uploadFile()}>Upload</Button>
             </div>
 
         </div >);
@@ -138,6 +134,8 @@ class CreateDoc extends Component {
                 document.getElementById('docName').value = '';
                 document.getElementById('docDesc').value = '';
                 document.getElementById('file').value = null;
+                document.getElementById('file_name').innerHTML = "File";
+
 
             });
         });
@@ -148,7 +146,7 @@ class CreateDoc extends Component {
             const userFile = e.target.files[0];
             this.setState({ userFile: userFile });
             document.getElementById('file_name').innerHTML = userFile.name;
-            
+
         }
     }
 
