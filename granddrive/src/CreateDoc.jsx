@@ -81,7 +81,7 @@ class CreateDoc extends Component {
                         docName: this.state.docName,
                         docDesc: this.state.docDesc,
                         ownerEmail: this.state.owner,
-                        sharedWith: this.state.sharedWith,
+                        sharedWith: ["test"],
                         url: url,
 
 
