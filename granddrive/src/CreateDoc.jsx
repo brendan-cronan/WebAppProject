@@ -12,7 +12,6 @@ class CreateDoc extends Component {
             sharedWith: [],
             userFile: null,
             url: '',
-
             updateTab: this.props.updateTab
         }
 
@@ -31,7 +30,14 @@ class CreateDoc extends Component {
 
             <div>
                 <label>Share With:</label>
-                <input type="text" id="sharedWith" name="sharedWith" />
+
+                <select id="sharedWith" name="sharedWith">
+                    {this.props.users.filter((user) => {
+                        return !this.state.sharedWith.includes(user.email) && user.email !== this.state.owner;
+                    }).map((user) =>
+                        <option key={user.email} value={user.email}>{user.email}</option>
+                    )}
+                </select>
                 <button onClick={() => this.addShared()}>+</button>
             </div>
 

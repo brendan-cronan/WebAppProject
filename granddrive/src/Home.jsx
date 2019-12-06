@@ -23,13 +23,16 @@ class Home extends Component {
             userEmail: this.props.location.state.userEmail,
             docs: [],
             activeTab: "myDocs",
+            users: []
         }
 
     }
 
     componentDidMount() {
-        AppDB.ref("Documents").on('child_added', (s) => this.fbAddHandler(s));
-        AppDB.ref("Documents").on("child_removed", (s) => this.fbRemoveListener(s));
+        AppDB.ref("Documents").on('child_added', (s) => this.docAddListener(s));
+        AppDB.ref("Documents").on("child_removed", (s) => this.docRemoveListener(s));
+        AppDB.ref("Users").on('child_added', (s) => this.userAddListener(s));
+        AppDB.ref("Users").on("child_removed", (s) => this.userRemoveListener(s));
     }
 
     render() {
@@ -90,7 +93,9 @@ class Home extends Component {
                     </div >
                     <div className={this.state.activeTab === "all" ? "" : "inactive"}>
                         <h2>All Viewable Documents</h2>
-                        {this.state.docs.map((x) =>
+                        {this.state.docs.filter(doc => {
+                            return doc.ownerEmail === this.state.userEmail || (doc.sharedWith !== undefined && doc.sharedWith.includes(this.state.userEmail));
+                        }).map((x) =>
                             <File key={x.mykey}
                                 myKey={x.mykey}
                                 owner={x.ownerEmail}
@@ -104,7 +109,7 @@ class Home extends Component {
                         }
                     </div>
                     <div className={this.state.activeTab === "uploadDoc" ? "" : "inactive"}>
-                        <CreateDoc userEmail={this.state.userEmail} updateTab={this.updateTabHandler.bind(this)} />
+                        <CreateDoc userEmail={this.state.userEmail} users={this.state.users} updateTab={this.updateTabHandler.bind(this)} />
                     </div>
                 </section>
 
@@ -112,7 +117,7 @@ class Home extends Component {
             </div>);
     }
 
-    fbAddHandler(snapshot) {
+    docAddListener(snapshot) {
         const item = snapshot.val();
 
         const newDocs = this.state.docs.slice(); /* creates a copy */
@@ -121,10 +126,25 @@ class Home extends Component {
         this.setState({ docs: newDocs });
     }
 
-    fbRemoveListener(snapshot) {
+    docRemoveListener(snapshot) {
         /* snapshot.key will hold the key of the item being REMOVED */
         const newDocs = this.state.docs.slice().filter(z => z.mykey !== snapshot.key);
         this.setState({ docs: newDocs });
+    }
+
+    userAddListener(snapshot) {
+        const item = snapshot.val();
+
+        const newUser = this.state.users.slice(); /* creates a copy */
+        newUser.push({ ...item, mykey: snapshot.key }); /* adds a new item */
+
+        this.setState({ users: newUser });
+    }
+
+    userRemoveListener(snapshot) {
+        /* snapshot.key will hold the key of the item being REMOVED */
+        const newUsers = this.state.users.slice().filter(z => z.mykey !== snapshot.key);
+        this.setState({ users: newUsers });
     }
 
     updateFormData(ev) {
