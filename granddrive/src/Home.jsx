@@ -9,7 +9,7 @@ import { withRouter } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 
 import {
-    CloudUpload,Settings, ExitToApp, Share, Description, RecentActors,OpenInNew
+    CloudUpload, Settings, ExitToApp, Share, Description, RecentActors, OpenInNew
 } from '@material-ui/icons';
 
 
@@ -47,17 +47,12 @@ class Home extends Component {
                 </section>
                 <section id="navpanel">
 
-                  
-                  <Button id="myDocs" startIcon={<Description />} variant="contained" color="Primary" className="navitem" onClick={this.menuItemHandler.bind(this)}>My Documents</Button>
+                    <Button id="myDocs" startIcon={<Description />} variant="contained" color="Primary" className="navitem" onClick={this.menuItemHandler.bind(this)}>My Documents</Button>
                     <Button id="shared" startIcon={<Share />} variant="contained" color="Primary" className="navitem" onClick={this.menuItemHandler.bind(this)}>Shared with Me</Button>
-                    <Button id="recent" startIcon={<RecentActors />} variant="contained" color="Primary" className="navitem" onClick={this.menuItemHandler.bind(this)}>Recent Files</Button>
-                    
-                   /* <span id="myDocs" className="navitem" onClick={this.menuItemHandler.bind(this)}>My Documents</span>
-                    <span id="shared" className="navitem" onClick={this.menuItemHandler.bind(this)}>Shared with Me</span>
-                    <span id="all" className="navitem" onClick={this.menuItemHandler.bind(this)}>All</span>*/
+                    <Button id="all" startIcon={<RecentActors />} variant="contained" color="Primary" className="navitem" onClick={this.menuItemHandler.bind(this)}>All</Button>
 
                 </section>
-                
+
                 <section id="main">
 
                     <div className={this.state.activeTab === "myDocs" ? "" : "inactive"}>
