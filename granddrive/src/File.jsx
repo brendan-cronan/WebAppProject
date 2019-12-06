@@ -15,14 +15,13 @@ class File extends Component {
     render() {
         return (
             <div >
-                {this.state.docName} {this.state.docDesc} <button onClick={() => this.openFile()}>Open</button>
+                {this.state.docName} {this.state.docDesc} <button onClick={() => this.changeSelected()}>Open</button>
 
             </div >
         );
     }
 
-    openFile() {
-        window.open(this.state.url, "_blank");
+    changeSelected() {
         this.state.recentlySelectedHandler(this.state);
     }
 }

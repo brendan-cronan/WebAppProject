@@ -18,12 +18,18 @@ class Selected extends Component {
                 {this.state.docName}
                 {this.state.docDesc}
                 {this.state.owner}
+                {this.state.url !== null ? <button onClick={() => this.openFile()}>Open</button> : null}
+
             </div>
         );
     }
 
     updateState(ev) {
         this.setState({ owner: ev.owner, docName: ev.docName, docDesc: ev.docDesc, url: ev.url })
+    }
+
+    openFile() {
+        window.open(this.state.url, "_blank");
     }
 }
 
