@@ -41,7 +41,7 @@ class Home extends Component {
                 <section id="navpanel">
                     <span id="myDocs" className="navitem" onClick={this.menuItemHandler.bind(this)}>My Documents</span>
                     <span id="shared" className="navitem" onClick={this.menuItemHandler.bind(this)}>Shared with Me</span>
-                    <span id="recent" className="navitem" onClick={this.menuItemHandler.bind(this)}>Recent</span>
+                    <span id="all" className="navitem" onClick={this.menuItemHandler.bind(this)}>All</span>
 
                 </section>
                 <section id="main">
@@ -50,7 +50,7 @@ class Home extends Component {
                         <h2>My Documents</h2>
                         {this.state.docs.filter(doc => {
                             return doc.ownerEmail === this.state.userEmail;
-                        }).map((x, i) =>
+                        }).map((x) =>
                             <File key={x.mykey}
                                 myKey={x.mykey}
                                 owner={x.ownerEmail}
@@ -67,7 +67,7 @@ class Home extends Component {
                         <h2>Shared with Me</h2>
                         {this.state.docs.filter(doc => {
                             return doc.ownerEmail !== this.state.userEmail;
-                        }).map((x, i) =>
+                        }).map((x) =>
                             <File key={x.mykey}
                                 myKey={x.mykey}
                                 owner={x.ownerEmail}
@@ -80,8 +80,20 @@ class Home extends Component {
                             />)
                         }
                     </div >
-                    <div className={this.state.activeTab === "recent" ? "" : "inactive"}>
-                        Recent documents go here
+                    <div className={this.state.activeTab === "all" ? "" : "inactive"}>
+                        <h2>All Viewable Documents</h2>
+                        {this.state.docs.map((x) =>
+                            <File key={x.mykey}
+                                myKey={x.mykey}
+                                owner={x.ownerEmail}
+                                docName={x.docName}
+                                docDesc={x.docDesc}
+                                sharedWith={x.sharedWith}
+                                url={x.url}
+                                delete={x.ownerEmail === this.state.userEmail}
+                                recentlySelectedHandler={this.recentlySelectedHandler.bind(this)}
+                            />)
+                        }
                     </div>
                     <div className={this.state.activeTab === "uploadDoc" ? "" : "inactive"}>
                         <CreateDoc userEmail={this.state.userEmail} updateTab={this.updateTabHandler.bind(this)} />
