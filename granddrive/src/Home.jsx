@@ -7,7 +7,7 @@ import File from './File';
 import Button from '@material-ui/core/Button';
 
 import {
-    CloudUpload, ExitToApp, Share, Description, RecentActors, OpenInNew, AllInbox
+    CloudUpload, ExitToApp, Share, Description, AllInbox
 } from '@material-ui/icons';
 
 
