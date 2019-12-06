@@ -18,7 +18,7 @@ class Selected extends Component {
                 {this.state.docName}
                 {this.state.docDesc}
                 {this.state.owner}
-                {this.state.url !== null ? <button onClick={() => this.openFile()}>Open</button> : null}
+                {this.state.url !== null ? <button onClick={() => this.openFile()}>View</button> : null}
 
             </div>
         );
