@@ -1,5 +1,30 @@
 import React, { Component } from "react";
+import Button from "@material-ui/core/Button";
+
+import {
+    ExpansionPanel,
+    ExpansionPanelSummary,
+    ExpansionPanelDetails,
+} from "@material-ui/core";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import Typography from "@material-ui/core/Typography";
+
+
+
+
+
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableRow
+} from "@material-ui/core";
+
+
+
 import { AppDB } from "./db-init";
+
 
 class File extends Component {
     constructor(props) {
@@ -9,6 +34,7 @@ class File extends Component {
             owner: this.props.owner,
             docName: this.props.docName,
             docDesc: this.props.docDesc,
+
             sharedWith: this.props.sharedWith,
             url: this.props.url,
             delete: this.props.delete,
@@ -21,7 +47,11 @@ class File extends Component {
         this.delete = this.state.delete;
 
         return (
-            <div >
+            <div>
+                {/* {this.state.docName} {this.state.docDesc} 
+                <Button variant="outlined" color="secondary" onClick={() => this.openFile()}>Open</Button> */}
+            
+            
                 {this.state.docName} {this.state.docDesc}
                 {this.delete
                     &&
@@ -29,7 +59,47 @@ class File extends Component {
                 }
                 <button onClick={() => this.changeSelected()}>Open</button>
 
-            </div >
+
+                <ExpansionPanel>
+                    <ExpansionPanelSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        id="panel1a-header"
+                    >
+                        <Typography className="type">{this.state.docName}</Typography>
+                    </ExpansionPanelSummary>
+                    {/* Contents Go Here */}
+                    <ExpansionPanelDetails>
+                        <Table>
+                            <TableHead>
+                                <TableCell>Owner</TableCell>
+                                <TableCell>Shared With</TableCell>
+                                <TableCell>
+                                    <Button variant="outlined" color="secondary" onClick={() => this.openFile()}>Open</Button>
+                                </TableCell>
+                            </TableHead>
+                            <TableBody>
+                                <TableRow>
+                                    <TableCell>{this.state.owner}</TableCell>
+                                    <TableCell>{this.state.sharedWith}</TableCell>
+                                </TableRow>
+
+
+
+
+
+
+
+
+                            </TableBody>
+                        </Table>
+
+                        {/* <Typography>
+                        {this.state.docDesc}
+                    </Typography> */}
+                    </ExpansionPanelDetails>
+                </ExpansionPanel>
+            </div>
+
         );
     }
 
