@@ -32,6 +32,7 @@ class CreateDoc extends Component {
             <div>
                 <label>Share With:</label>
                 <input type="text" id="sharedWith" name="sharedWith" />
+                <button onClick={() => this.addShared()}>+</button>
             </div>
 
             <div>
@@ -47,7 +48,7 @@ class CreateDoc extends Component {
                 <button onClick={() => this.uploadFile()}>Upload</button>
             </div>
 
-        </div>);
+        </div >);
     }
 
     uploadFile() {
@@ -81,7 +82,7 @@ class CreateDoc extends Component {
                         docName: this.state.docName,
                         docDesc: this.state.docDesc,
                         ownerEmail: this.state.owner,
-                        sharedWith: ["test"],
+                        sharedWith: this.state.sharedWith,
                         url: url,
 
 
@@ -102,6 +103,12 @@ class CreateDoc extends Component {
             this.setState({ userFile: userFile });
             console.log(userFile)
         }
+    }
+
+    addShared() {
+        console.log('Sharing with ' + document.getElementById('sharedWith').value);
+        this.state.sharedWith.push(document.getElementById('sharedWith').value)
+        document.getElementById('sharedWith').value = '';
     }
 
     updateFormData(ev) {
