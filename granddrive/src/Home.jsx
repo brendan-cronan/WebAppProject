@@ -7,14 +7,13 @@ import File from './File';
 import Button from '@material-ui/core/Button';
 
 import {
+
     CloudUpload, ExitToApp, Share, Description, RecentActors, OpenInNew, AllInbox
 } from '@material-ui/icons';
 
 
 
 class Home extends Component {
-
-
 
     constructor(props) {
         super(props);
