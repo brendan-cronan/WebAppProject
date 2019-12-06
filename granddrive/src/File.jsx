@@ -52,7 +52,7 @@ class File extends Component {
         return (
             <div>
 
-                <ExpansionPanel style={{marginBottom:8}}>
+                <ExpansionPanel style={{ marginBottom: 8 }}>
                     <ExpansionPanelSummary
                         expandIcon={<ExpandMoreIcon />}
                         id="panel1a-header"
@@ -89,7 +89,10 @@ class File extends Component {
                                         <Button startIcon={<OpenInNew />} variant="outlined" color="primary" onClick={() => this.openFile()}>Open</Button>
                                     </TableCell>
                                     <TableCell>
-                                        <Button startIcon={<HighlightOff />} variant="outlined" color="secondary" onClick={() => this.deleteSelected()}>Delete</Button>
+                                        {this.state.delete &&
+                                            < Button startIcon={<HighlightOff />} variant="outlined" color="secondary" onClick={() => this.deleteSelected()}>Delete</Button>
+                                        }
+
                                     </TableCell>
                                 </TableRow>
 
