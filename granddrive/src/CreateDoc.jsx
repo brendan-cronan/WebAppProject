@@ -31,7 +31,7 @@ class CreateDoc extends Component {
 
             <div>
                 <label>Share With:</label>
-                <input type="text" id="shareWith" name="shareWith" />
+                <input type="text" id="sharedWith" name="sharedWith" />
             </div>
 
             <div>
