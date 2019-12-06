@@ -8,7 +8,7 @@ import Selected from './Selected';
 import Button from '@material-ui/core/Button';
 
 import {
-    CloudUpload, Settings, ExitToApp, Share, Description, RecentActors, OpenInNew, AllInbox
+    CloudUpload, ExitToApp, Share, Description, RecentActors, OpenInNew, AllInbox
 } from '@material-ui/icons';
 
 
@@ -110,8 +110,6 @@ class Home extends Component {
                 </section>
 
                 <section id="most-recent">
-                    <Selected ref={this.selected}
-                    />
                 </section>
             </div>);
     }
