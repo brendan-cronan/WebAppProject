@@ -3,12 +3,12 @@ import './Home.css'
 import { AppDB, AppAUTH } from "./db-init";
 import CreateDoc from './CreateDoc';
 import File from './File';
-import Selected from './Selected';
 
 import Button from '@material-ui/core/Button';
 
 import {
-    CloudUpload, Settings, ExitToApp, Share, Description, RecentActors
+
+    CloudUpload, ExitToApp, Share, Description, RecentActors, OpenInNew, AllInbox
 } from '@material-ui/icons';
 
 
@@ -40,7 +40,6 @@ class Home extends Component {
                 <section id="toolbar">
                     <Button id="uploadDoc" startIcon={<CloudUpload />} className="menuitem" onClick={this.newButtonHandler.bind(this)}>Upload</Button>
                     <span className="filler"></span>
-                    <Button startIcon={<Settings />} className="menuitem" onClick={this.optionsButtonHandler.bind(this)}>Options</Button>
                     <Button startIcon={<ExitToApp />} className="menuitem" onClick={this.signoutButtonHandler.bind(this)}>Sign Out</Button>
                 </section>
                 <section id="navpanel">
@@ -48,7 +47,7 @@ class Home extends Component {
                     <Button id="myDocs" startIcon={<Description />} variant="contained" color="primary" className="navitem" onClick={this.menuItemHandler.bind(this)}>My Documents</Button>
                     <Button id="shared" startIcon={<Share />} variant="contained" color="primary" className="navitem" onClick={this.menuItemHandler.bind(this)}>Shared with Me</Button>
 
-                    <Button id="all" startIcon={<RecentActors />} variant="contained" color="primary" className="navitem" onClick={this.menuItemHandler.bind(this)}>All</Button>
+                    <Button id="all" startIcon={<AllInbox />} variant="contained" color="primary" className="navitem" onClick={this.menuItemHandler.bind(this)}>All</Button>
 
                 </section>
 
@@ -67,14 +66,14 @@ class Home extends Component {
                                 sharedWith={x.sharedWith}
                                 url={x.url}
                                 delete={true}
-                                recentlySelectedHandler={this.recentlySelectedHandler.bind(this)}
+
                             />)
                         }
                     </div>
                     <div className={this.state.activeTab === "shared" ? "" : "inactive"}>
                         <h2>Shared with Me</h2>
                         {this.state.docs.filter(doc => {
-                            return doc.ownerEmail !== this.state.userEmail;
+                            return doc.sharedWith !== undefined && doc.sharedWith.includes(this.state.userEmail);
                         }).map((x) =>
                             <File key={x.mykey}
                                 myKey={x.mykey}
@@ -84,7 +83,7 @@ class Home extends Component {
                                 sharedWith={x.sharedWith}
                                 url={x.url}
                                 delete={false}
-                                recentlySelectedHandler={this.recentlySelectedHandler.bind(this)}
+
                             />)
                         }
                     </div >
@@ -99,7 +98,7 @@ class Home extends Component {
                                 sharedWith={x.sharedWith}
                                 url={x.url}
                                 delete={x.ownerEmail === this.state.userEmail}
-                                recentlySelectedHandler={this.recentlySelectedHandler.bind(this)}
+
                             />)
                         }
                     </div>
@@ -109,8 +108,6 @@ class Home extends Component {
                 </section>
 
                 <section id="most-recent">
-                    <Selected ref={this.selected}
-                    />
                 </section>
             </div>);
     }
@@ -145,10 +142,6 @@ class Home extends Component {
     newButtonHandler(ev) {
         this.menuItemHandler(ev);
         console.log('new button pressed');
-    }
-
-    optionsButtonHandler(ev) {
-        console.log('options button pressed')
     }
 
     signoutButtonHandler(ev) {
