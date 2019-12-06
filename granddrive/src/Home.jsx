@@ -47,10 +47,10 @@ class Home extends Component {
                 </section>
                 <section id="navpanel">
 
-                    <Button id="myDocs" startIcon={<Description />} variant="contained" color="Primary" className="navitem" onClick={this.menuItemHandler.bind(this)}>My Documents</Button>
-                    <Button id="shared" startIcon={<Share />} variant="contained" color="Primary" className="navitem" onClick={this.menuItemHandler.bind(this)}>Shared with Me</Button>
+                    <Button id="myDocs" startIcon={<Description />} variant="contained" color="primary" className="navitem" onClick={this.menuItemHandler.bind(this)}>My Documents</Button>
+                    <Button id="shared" startIcon={<Share />} variant="contained" color="primary" className="navitem" onClick={this.menuItemHandler.bind(this)}>Shared with Me</Button>
 
-                    <Button id="all" startIcon={<RecentActors />} variant="contained" color="Primary" className="navitem" onClick={this.menuItemHandler.bind(this)}>All</Button>
+                    <Button id="all" startIcon={<RecentActors />} variant="contained" color="primary" className="navitem" onClick={this.menuItemHandler.bind(this)}>All</Button>
 
                 </section>
 

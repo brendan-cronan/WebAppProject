@@ -50,8 +50,8 @@ class File extends Component {
             <div>
                 {/* {this.state.docName} {this.state.docDesc} 
                 <Button variant="outlined" color="secondary" onClick={() => this.openFile()}>Open</Button> */}
-            
-            
+
+
                 {/* {this.state.docName} {this.state.docDesc}
                 {this.delete
                     &&
@@ -71,14 +71,16 @@ class File extends Component {
                     <ExpansionPanelDetails>
                         <Table>
                             <TableHead>
-                                <TableCell>Owner</TableCell>
-                                <TableCell>Shared With</TableCell>
-                                <TableCell>
-                                    <Button variant="outlined" color="Primary" onClick={() => this.changeSelected()}>Open</Button>
-                                </TableCell>
-                                <TableCell>
-                                    <Button variant="outlined" color="secondary" onClick={() => this.deleteSelected()}>Delete</Button>
-                                </TableCell>
+                                <TableRow>
+                                    <TableCell>Owner</TableCell>
+                                    <TableCell>Shared With</TableCell>
+                                    <TableCell>
+                                        <Button variant="outlined" color="primary" onClick={() => this.changeSelected()}>Open</Button>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Button variant="outlined" color="secondary" onClick={() => this.deleteSelected()}>Delete</Button>
+                                    </TableCell>
+                                </TableRow>
                             </TableHead>
                             <TableBody>
                                 <TableRow>
