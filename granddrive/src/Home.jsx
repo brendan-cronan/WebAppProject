@@ -3,7 +3,6 @@ import './Home.css'
 import { AppDB, AppAUTH } from "./db-init";
 import CreateDoc from './CreateDoc';
 import File from './File';
-import Selected from './Selected';
 
 import Button from '@material-ui/core/Button';
 
@@ -75,7 +74,7 @@ class Home extends Component {
                     <div className={this.state.activeTab === "shared" ? "" : "inactive"}>
                         <h2>Shared with Me</h2>
                         {this.state.docs.filter(doc => {
-                            return doc.ownerEmail !== this.state.userEmail;
+                            return doc.sharedWith !== undefined && doc.sharedWith.includes(this.state.userEmail);
                         }).map((x) =>
                             <File key={x.mykey}
                                 myKey={x.mykey}
