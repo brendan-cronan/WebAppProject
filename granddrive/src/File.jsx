@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { AppDB } from "./db-init";
 
 class File extends Component {
     constructor(props) {
@@ -37,7 +38,10 @@ class File extends Component {
     }
 
     deleteSelected() {
-        console.log()
+        console.log(`Removing ${this.state.myKey}`)
+        AppDB.ref('Documents')
+            .child(this.state.myKey)
+            .remove();
     }
 }
 
