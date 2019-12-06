@@ -5,10 +5,14 @@ import {
     ExpansionPanel,
     ExpansionPanelSummary,
     ExpansionPanelDetails,
+    Chip
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Typography from "@material-ui/core/Typography";
 
+import {
+    OpenInNew, HighlightOff
+} from '@material-ui/icons';
 
 
 
@@ -48,17 +52,6 @@ class File extends Component {
 
         return (
             <div>
-                {/* {this.state.docName} {this.state.docDesc} 
-                <Button variant="outlined" color="secondary" onClick={() => this.openFile()}>Open</Button> */}
-
-
-                {/* {this.state.docName} {this.state.docDesc}
-                {this.delete
-                    &&
-                    <button onClick={() => this.deleteSelected()}>Delete</button>
-                }
-                <button onClick={() => this.changeSelected()}>Open</button> */}
-
 
                 <ExpansionPanel>
                     <ExpansionPanelSummary
@@ -74,18 +67,25 @@ class File extends Component {
                                 <TableRow>
                                     <TableCell>Owner</TableCell>
                                     <TableCell>Shared With</TableCell>
-                                    <TableCell>
-                                        <Button variant="outlined" color="primary" onClick={() => this.changeSelected()}>Open</Button>
-                                    </TableCell>
-                                    <TableCell>
-                                        <Button variant="outlined" color="secondary" onClick={() => this.deleteSelected()}>Delete</Button>
-                                    </TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
                                 <TableRow>
                                     <TableCell>{this.state.owner}</TableCell>
-                                    <TableCell>{this.state.sharedWith}</TableCell>
+                                    <TableCell>
+                                        {
+                                            this.state.sharedWith.map((user) => (
+                                                <Chip key={user} label={user} />
+                                            ))}
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell>
+                                        <Button startIcon={<OpenInNew />} variant="outlined" color="primary" onClick={() => this.changeSelected()}>Open</Button>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Button startIcon={<HighlightOff />} variant="outlined" color="secondary" onClick={() => this.deleteSelected()}>Delete</Button>
+                                    </TableCell>
                                 </TableRow>
 
 

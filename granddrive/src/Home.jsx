@@ -8,14 +8,12 @@ import Selected from './Selected';
 import Button from '@material-ui/core/Button';
 
 import {
-    CloudUpload, Settings, ExitToApp, Share, Description, RecentActors, OpenInNew
+    CloudUpload, Settings, ExitToApp, Share, Description, RecentActors
 } from '@material-ui/icons';
 
 
 
 class Home extends Component {
-
-
 
     constructor(props) {
         super(props);
