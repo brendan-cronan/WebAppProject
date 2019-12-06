@@ -50,7 +50,7 @@ class Home extends Component {
                         {this.state.docs.filter(doc => {
                             return doc.ownerEmail === this.state.userEmail;
                         }).map((x, i) =>
-                            <File key={i}
+                            <File key={x.mykey}
                                 owner={x.ownerEmail}
                                 docName={x.docName}
                                 docDesc={x.docDesc}
@@ -66,7 +66,7 @@ class Home extends Component {
                         {this.state.docs.filter(doc => {
                             return doc.ownerEmail !== this.state.userEmail;
                         }).map((x, i) =>
-                            <File key={i}
+                            <File key={x.mykey}
                                 owner={x.ownerEmail}
                                 docName={x.docName}
                                 docDesc={x.docDesc}

@@ -4,6 +4,7 @@ class File extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            myKey: this.props.myKey,
             owner: this.props.owner,
             docName: this.props.docName,
             docDesc: this.props.docDesc,
@@ -23,7 +24,7 @@ class File extends Component {
                 {this.state.docName} {this.state.docDesc}
                 {this.delete
                     &&
-                    <button>delete</button>
+                    <button onClick={() => this.deleteSelected()}>Delete</button>
                 }
                 <button onClick={() => this.changeSelected()}>Open</button>
 
@@ -33,6 +34,10 @@ class File extends Component {
 
     changeSelected() {
         this.state.recentlySelectedHandler(this.state);
+    }
+
+    deleteSelected() {
+        console.log()
     }
 }
 
