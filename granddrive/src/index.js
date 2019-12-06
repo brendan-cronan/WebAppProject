@@ -2,12 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import { AppDB } from "./db-init.js";
+//import { AppDB } from "./db-init.js";
 import { BrowserRouter } from "react-router-dom";
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
-  <BrowserRouter>
+  <BrowserRouter basename="/~karneyl/CIS-371/project">
     <App />
   </BrowserRouter>,
   document.getElementById("root")

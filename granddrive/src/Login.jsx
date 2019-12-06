@@ -47,7 +47,7 @@ class Login extends Component {
         AppAUTH.signInWithEmailAndPassword(this.state.userEmail, this.state.userPassword)
             .then(u => {
                 console.log("You logged in as " + u.user.email);
-                this.props.history.push("/home");
+                this.props.history.push({ pathname: "/home", state: { userEmail: this.state.userEmail } });
             })
             .catch(err => {
                 console.log("Error " + err);

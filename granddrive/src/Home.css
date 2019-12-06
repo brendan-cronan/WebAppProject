@@ -13,14 +13,14 @@ body {
   height: 100%;
   display: grid;
   grid-template-rows: auto 1fr auto;
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: 1fr 6fr;
 }
 
 #toolbar {
   display: flex;
   flex-direction: row;
   grid-column-start: 1;
-  grid-column-end: 3;
+  grid-column-end: 4;
   background: rgb(19, 79, 136);
 }
 
@@ -39,6 +39,13 @@ body {
 
 .menuitem:first-of-type {
   margin: 0.6rem;
+}
+
+#most-recent {
+  display: flex;
+  flex-direction: column;
+  width: 10rem;
+  height: 100%;
 }
 
 .filler {
@@ -63,4 +70,8 @@ body {
 .navitem:hover {
   background-color: rgb(255, 255, 255);
   color: rgb(32, 32, 32);
+}
+
+.inactive {
+  display: none;
 }

@@ -1,14 +1,25 @@
 import React, { Component } from "react";
 import './Home.css'
-import { AppDB } from "./db-init";
+import { AppDB, AppAUTH } from "./db-init";
+import CreateDoc from './CreateDoc';
+import File from './File';
+import Selected from './Selected';
+import { withRouter } from 'react-router-dom';
+
 
 class Home extends Component {
 
+
+
     constructor(props) {
         super(props);
+        this.selected = React.createRef();
         this.state = {
-            docs: []
+            userEmail: this.props.location.state.userEmail,
+            docs: [],
+            activeTab: "myDocs",
         }
+
     }
 
     componentDidMount() {
@@ -17,28 +28,82 @@ class Home extends Component {
     }
 
     render() {
-        return (<div id="container">
+        return (
 
-            <section id="toolbar">
-                <button className="menuitem" onClick={this.newButtonHandler.bind(this)}>New</button>
-                <span className="filler"></span>
-                <button className="menuitem" onClick={this.optionsButtonHandler.bind(this)}>Options</button>
-                <button className="menuitem" onClick={this.signoutButtonHandler.bind(this)}>Sign Out</button>
-            </section>
-            <section id="navpanel">
-                <span className="navitem">My Documents</span>
-                <span className="navitem">Shared with Me</span>
-                <span className="navitem">Recent</span>
+            <div id="container">
 
-            </section>
-            <section id="main">
-                <h2>Documents</h2>
-                <ul>
-                    {this.state.docs.map((x, i) =>
-                        <li key={i}>{x.name} {x.ownerId}</li>)}
-                </ul>
-            </section>
-        </div>);
+                <section id="toolbar">
+                    <button id="uploadDoc" className="menuitem" onClick={this.newButtonHandler.bind(this)}>Upload</button>
+                    <span className="filler"></span>
+                    <button className="menuitem" onClick={this.optionsButtonHandler.bind(this)}>Options</button>
+                    <button className="menuitem" onClick={this.signoutButtonHandler.bind(this)}>Sign Out</button>
+                </section>
+                <section id="navpanel">
+                    <span id="myDocs" className="navitem" onClick={this.menuItemHandler.bind(this)}>My Documents</span>
+                    <span id="shared" className="navitem" onClick={this.menuItemHandler.bind(this)}>Shared with Me</span>
+                    <span id="all" className="navitem" onClick={this.menuItemHandler.bind(this)}>All</span>
+
+                </section>
+                <section id="main">
+
+                    <div className={this.state.activeTab === "myDocs" ? "" : "inactive"}>
+                        <h2>My Documents</h2>
+                        {this.state.docs.filter(doc => {
+                            return doc.ownerEmail === this.state.userEmail;
+                        }).map((x) =>
+                            <File key={x.mykey}
+                                myKey={x.mykey}
+                                owner={x.ownerEmail}
+                                docName={x.docName}
+                                docDesc={x.docDesc}
+                                sharedWith={x.sharedWith}
+                                url={x.url}
+                                delete={true}
+                                recentlySelectedHandler={this.recentlySelectedHandler.bind(this)}
+                            />)
+                        }
+                    </div>
+                    <div className={this.state.activeTab === "shared" ? "" : "inactive"}>
+                        <h2>Shared with Me</h2>
+                        {this.state.docs.filter(doc => {
+                            return doc.ownerEmail !== this.state.userEmail;
+                        }).map((x) =>
+                            <File key={x.mykey}
+                                myKey={x.mykey}
+                                owner={x.ownerEmail}
+                                docName={x.docName}
+                                docDesc={x.docDesc}
+                                sharedWith={x.sharedWith}
+                                url={x.url}
+                                delete={false}
+                                recentlySelectedHandler={this.recentlySelectedHandler.bind(this)}
+                            />)
+                        }
+                    </div >
+                    <div className={this.state.activeTab === "all" ? "" : "inactive"}>
+                        <h2>All Viewable Documents</h2>
+                        {this.state.docs.map((x) =>
+                            <File key={x.mykey}
+                                myKey={x.mykey}
+                                owner={x.ownerEmail}
+                                docName={x.docName}
+                                docDesc={x.docDesc}
+                                sharedWith={x.sharedWith}
+                                url={x.url}
+                                delete={x.ownerEmail === this.state.userEmail}
+                                recentlySelectedHandler={this.recentlySelectedHandler.bind(this)}
+                            />)
+                        }
+                    </div>
+                    <div className={this.state.activeTab === "uploadDoc" ? "" : "inactive"}>
+                        <CreateDoc userEmail={this.state.userEmail} updateTab={this.updateTabHandler.bind(this)} />
+                    </div>
+                </section>
+                <section id="most-recent">
+                    <Selected ref={this.selected}
+                    />
+                </section>
+            </div>);
     }
 
     fbAddHandler(snapshot) {
@@ -69,6 +134,7 @@ class Home extends Component {
     }
 
     newButtonHandler(ev) {
+        this.menuItemHandler(ev);
         console.log('new button pressed');
     }
 
@@ -78,6 +144,26 @@ class Home extends Component {
 
     signoutButtonHandler(ev) {
         console.log('signout button pressed')
+        AppAUTH.signOut().then(() => {
+            console.log('signed out');
+            this.props.history.goBack();
+        })
+    }
+
+    menuItemHandler(ev) {
+        let tab = ev.currentTarget.id;
+        this.updateTabHandler(tab);
+    }
+
+    updateTabHandler(tab) {
+        console.log(`switching active tab to ${tab}`)
+        this.setState({ activeTab: tab });
+    }
+
+    recentlySelectedHandler(ev) {
+        console.log(ev)
+        this.selected.current.updateState(ev);
+        //this.setState({ mostRecentlySelected: ev });
     }
 }
 
