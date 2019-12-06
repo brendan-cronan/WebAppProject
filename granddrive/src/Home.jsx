@@ -93,7 +93,9 @@ class Home extends Component {
                     </div >
                     <div className={this.state.activeTab === "all" ? "" : "inactive"}>
                         <h2>All Viewable Documents</h2>
-                        {this.state.docs.map((x) =>
+                        {this.state.docs.filter(doc => {
+                            return doc.ownerEmail === this.state.userEmail || (doc.sharedWith !== undefined && doc.sharedWith.includes(this.state.userEmail));
+                        }).map((x) =>
                             <File key={x.mykey}
                                 myKey={x.mykey}
                                 owner={x.ownerEmail}
