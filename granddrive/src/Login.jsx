@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { AppAUTH } from "./db-init";
+import { AppDB, AppAUTH } from "./db-init";
 
 class Login extends Component {
     constructor(props) {
@@ -35,6 +35,14 @@ class Login extends Component {
         AppAUTH.createUserWithEmailAndPassword(this.state.userEmail, this.state.userPassword)
             .then(u => {
                 console.log("User created with UID " + u.user.uid);
+
+                AppDB.ref("Users")
+                    .push()
+                    .set({
+                        email: this.state.userEmail,
+                        creationTime: u.user.metadata.creationTime
+                    });
+
                 this.doSignIn();
             })
             .catch(err => {
@@ -43,7 +51,7 @@ class Login extends Component {
     }
 
     doSignIn() {
-        //console.log(`${this.userEmail} ${this.userPassword}`);
+
         AppAUTH.signInWithEmailAndPassword(this.state.userEmail, this.state.userPassword)
             .then(u => {
                 console.log("You logged in as " + u.user.email);
