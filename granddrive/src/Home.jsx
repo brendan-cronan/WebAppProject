@@ -37,6 +37,7 @@ class Home extends Component {
     render() {
         return (
 
+
             <div id="container">
 
                 <section id="toolbar">
@@ -52,9 +53,6 @@ class Home extends Component {
                     <Button id="shared" startIcon={<Share />} variant="contained" color="Primary" className="navitem" onClick={this.menuItemHandler.bind(this)}>Shared with Me</Button>
                     <Button id="recent" startIcon={<RecentActors />} variant="contained" color="Primary" className="navitem" onClick={this.menuItemHandler.bind(this)}>Recent Files</Button>
                     
-                   /* <span id="myDocs" className="navitem" onClick={this.menuItemHandler.bind(this)}>My Documents</span>
-                    <span id="shared" className="navitem" onClick={this.menuItemHandler.bind(this)}>Shared with Me</span>
-                    <span id="all" className="navitem" onClick={this.menuItemHandler.bind(this)}>All</span>*/
 
                 </section>
                 
